@@ -71,6 +71,8 @@ NULL
 #'
 #' @param labRow character vectors with row labels to use (from top to bottom); default to rownames(x).
 #' @param labCol character vectors with column labels to use (from left to right); default to colnames(x).
+#' 
+#' @param tooltip_labels character vector with labels to display in the tooltip for row, column and value
 #'         
 #' @param ... currently ignored
 #' 
@@ -130,6 +132,9 @@ d3heatmap <- function(x,
   brush_color = "#0000FF",
   show_grid = TRUE,
   anim_duration = 500,
+  
+  ## tooltips
+  tooltip_labels = NULL,
   
   ...
 ) {
@@ -302,7 +307,6 @@ d3heatmap <- function(x,
     stop("cellnote matrix must have same dimensions as x")
   }  
   
-  
   ## Final touches before htmlwidgets
   ##=======================
 
@@ -335,7 +339,8 @@ d3heatmap <- function(x,
     yaxis_font_size = yaxis_font_size,
     brush_color = brush_color,
     show_grid = show_grid,
-    anim_duration = anim_duration
+    anim_duration = anim_duration,
+    tooltip_labels = tooltip_labels
   ))
 
   if (is.null(rowDend)) {

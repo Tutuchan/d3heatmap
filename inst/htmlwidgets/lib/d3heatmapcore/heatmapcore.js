@@ -148,6 +148,11 @@ function heatmap(selector, data, options) {
   if (typeof(opts.anim_duration) === 'undefined') {
     opts.anim_duration = 500;
   }
+  
+  opts.tooltip_labels = options.tooltip_labels
+  if (typeof(opts.tooltip_labels) === 'undefined') {
+    opts.tooltip_labels = ["Row", "Column", "Value"];
+  }
 
   if (!data.rows) {
     opts.yclust_width = 0;
@@ -239,9 +244,9 @@ function heatmap(selector, data, options) {
         .attr('class', 'd3heatmap-tip')
         .html(function(d, i) {
           return "<table>" + 
-            "<tr><th align=\"right\">Row</th><td>" + htmlEscape(data.rows[d.row]) + "</td></tr>" +
-            "<tr><th align=\"right\">Column</th><td>" + htmlEscape(data.cols[d.col]) + "</td></tr>" +
-            "<tr><th align=\"right\">Value</th><td>" + htmlEscape(d.label) + "</td></tr>" +
+            "<tr><th align=\"right\">" + opts.tooltip_labels[0] + "</th><td>" + htmlEscape(data.rows[d.row]) + "</td></tr>" +
+            "<tr><th align=\"right\">" + opts.tooltip_labels[1] + "</th><td>" + htmlEscape(data.cols[d.col]) + "</td></tr>" +
+            "<tr><th align=\"right\">" + opts.tooltip_labels[2] + "</th><td>" + htmlEscape(d.label) + "</td></tr>" +
             "</table>";
         })
         .direction("se")
